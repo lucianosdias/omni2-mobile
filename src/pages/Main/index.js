@@ -19,10 +19,14 @@ export default class Main extends Component {
   }
 
   handleSignIn = async () => {
-    const response = await api.post('boxes', {
-      title: this.state.newBox
-    });
-
+    console.log('handleSignIn');
+    try {
+      const response = await api.post('boxes', {
+        title: this.state.newBox
+      });
+    } catch (error) {
+      console.log({ error });
+    }
     await AsyncStorage.setItem('@LsdBox:box', response.data._id);
 
     this.props.navigation.navigate('Box');
